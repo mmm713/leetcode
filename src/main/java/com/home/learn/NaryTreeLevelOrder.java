@@ -18,7 +18,8 @@ public class NaryTreeLevelOrder {
             val = _val;
             children = _children;
         }
-    };
+    }
+
     private List<List<Integer>> result = new ArrayList<>();
 
     public List<List<Integer>> levelOrder(Node root) {
