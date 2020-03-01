@@ -4,7 +4,7 @@ import com.home.learn.inheritance.Father;
 import com.home.learn.inheritance.Son;
 import org.junit.jupiter.api.Test;
 
-public class InheritanceTest {
+class InheritanceTest {
 
     @Test
     public void test() {

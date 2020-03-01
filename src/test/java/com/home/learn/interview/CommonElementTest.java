@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class CommonElementTest {
+class CommonElementTest {
 
     @Test
     public void testHappyCases() {

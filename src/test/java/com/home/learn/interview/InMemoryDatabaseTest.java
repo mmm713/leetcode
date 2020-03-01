@@ -3,7 +3,7 @@ package com.home.learn.interview;
 import com.home.learn.lyft.InMemoryDatabase;
 import org.junit.jupiter.api.Test;
 
-public class InMemoryDatabaseTest {
+class InMemoryDatabaseTest {
 
     @Test
     public void test() {
