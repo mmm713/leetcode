@@ -1,5 +1,7 @@
 package com.home.learn.lyft;
 
+import com.home.learn.library.TrieNode;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,38 +18,6 @@ ormed till now as the root node. Again, we need to sort the listlist
 of length mm indicating the options available for the hot sentences, which takes O\big(m \log m\big)O(mlogm) time.
  */
 public class AutocompleteSystem {
-    static class TrieNode implements Comparable<TrieNode> {
-        TrieNode[] children;
-        int freq;
-        String word;
-        List<TrieNode> tops;
-
-        public TrieNode() {
-            this.children = new TrieNode[128];
-            this.freq = 0;
-            this.word = null;
-            tops = new ArrayList<>();
-        }
-
-        @Override
-        public int compareTo(TrieNode o) {
-            return (this.freq == o.freq) ? (this.word.compareTo(o.word)) : (o.freq - this.freq);
-        }
-
-        public String getWord() {
-            return word;
-        }
-
-        public void top(TrieNode node) {
-            if(!this.tops.contains(node)){
-                this.tops.add(node);
-            }
-            Collections.sort(tops);
-            if(tops.size() > 3){
-                tops.remove(tops.size() - 1);
-            }
-        }
-    }
 
     TrieNode root;
     TrieNode cur;
