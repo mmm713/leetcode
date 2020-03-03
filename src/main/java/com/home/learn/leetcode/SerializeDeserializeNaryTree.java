@@ -1,99 +1,60 @@
 package com.home.learn.leetcode;
 
-import javafx.util.Pair;
-
 import java.util.*;
 
 public class SerializeDeserializeNaryTree {
     static class Node {
         public int val;
         public List<Node> children;
-        public Node() {}
-        public Node(int _val) {
-            val = _val;
+        public Node(int val) {
+            this.val = val;
         }
-        public Node(int _val, List<Node> _children) {
-            val = _val;
-            children = _children;
-        }
-    }
-
-    static class WrappableInt {
-        private Integer value;
-        public WrappableInt(Integer x) {
-            this.value = x;
-        }
-        public Integer getValue() {
-            return this.value;
-        }
-        public void increment() {
-            this.value++;
+        public Node(int val, List<Node> children) {
+            this.val = val;
+            this.children = children;
         }
     }
 
-    // Was searching for typedef alternatives in Java and came across fake classes
-    // Mostly considered an anti-pattern but it definitely makes our code much more
-    // readable!
-    static class DeserializedObject extends HashMap<Integer, Pair<Integer, Pair<Integer, Node>>> {}
-
+    String NN="X";
+    String spliter=",";
     // Encodes a tree to a single string.
     public String serialize(Node root) {
-        StringBuilder sb = new StringBuilder();
-        serializeHelper(root, sb, new WrappableInt(1), null);
+        StringBuilder sb=new StringBuilder();
+        buildString(root,sb);
         return sb.toString();
     }
-
-    private void serializeHelper(Node root, StringBuilder sb, WrappableInt identity, Integer parentId) {
-        if (root == null) {
-            return;
-        }
-        // Own identity
-        sb.append((char) (identity.getValue() + '0'));
-        // Actual value
-        sb.append((char) (root.val + '0'));
-        // Parent's identity
-        sb.append((char) (parentId == null ? 'N' : parentId + '0'));
-        parentId = identity.getValue();
-        for (Node child : root.children) {
-            identity.increment();
-            serializeHelper(child, sb, identity, parentId);
+    private void buildString(Node node, StringBuilder sb){
+        if(node==null){
+            sb.append(NN);
+            sb.append(spliter);
+        }else{
+            sb.append(node.val);
+            sb.append(spliter);
+            sb.append(node.children.size());
+            sb.append(spliter);
+            for (Node child:node.children){
+                buildString(child,sb);
+            }
         }
     }
 
     // Decodes your encoded data to tree.
     public Node deserialize(String data) {
-        if(data.isEmpty())
-            return null;
-        return deserializeHelper(data);
+        Deque<String> deque=new ArrayDeque<>(Arrays.asList(data.split(spliter)));
+        return buildTree(deque);
     }
+    private Node buildTree(Deque<String> deque){
+        String s1=deque.removeFirst();
+        if(s1.equals(NN)) return null;
 
-    private Node deserializeHelper(String data) {
-        // HashMap explained in the algorithm
-        DeserializedObject nodesAndParents = new DeserializedObject();
-        // Constructing the hashmap using the input string
-        for (int i = 0; i < data.length(); i+=3) {
-            int id = data.charAt(i) - '0';
-            int orgValue = data.charAt(i + 1) - '0';
-            int parentId = data.charAt(i + 2) - '0';
-            Pair<Integer, Pair<Integer, Node>> node = new Pair<>(orgValue,
-                    new Pair<>(parentId,
-                            new Node(orgValue, new ArrayList<Node>())));
-            nodesAndParents.put(id, node);
+        int rootVal=Integer.parseInt(s1);
+        int childrenNumber=Integer.parseInt(deque.removeFirst());
+
+        Node root=new Node(rootVal);
+        root.children=new ArrayList<>();
+        for (int i=0;i<childrenNumber;i++){
+            root.children.add(buildTree(deque));
         }
-
-        // A second pass for tying up the proper child connections
-        for (int i = 3; i < data.length(); i += 3) {
-            // Current node
-            int id = data.charAt(i) - '0';
-            Node node = nodesAndParents.get(id).getValue().getValue();
-            // Parent node
-            int parentId = data.charAt(i + 2) - '0';
-            Node parentNode = nodesAndParents.get(parentId).getValue().getValue();
-            // Attach!
-            parentNode.children.add(node);
-        }
-
-        // Return the root node.
-        return nodesAndParents.get(data.charAt(0) - '0').getValue().getValue();
+        return root;
     }
 }
