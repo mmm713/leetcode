@@ -1,6 +1,6 @@
 package com.home.learn.interview;
 
-import com.home.learn.leetcode.LongestSubArraySumAtMostK;
+import com.home.learn.leetcode.subarray.LongestSubArraySumAtMostK;
 import org.junit.jupiter.api.Test;
 
 

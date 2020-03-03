@@ -1,4 +1,4 @@
-package com.home.learn.leetcode;
+package com.home.learn.leetcode.subarray;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

@@ -1,4 +1,4 @@
-package com.home.learn.leetcode;
+package com.home.learn.leetcode.subarray;
 
 public class LongestSubArraySumAtMostK {
     public int atMostSum(int[] arr, int n, int k) {

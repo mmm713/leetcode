@@ -1,4 +1,4 @@
-package com.home.learn.leetcode;
+package com.home.learn.leetcode.tree;
 
 import com.home.learn.library.TreeNode;
 
