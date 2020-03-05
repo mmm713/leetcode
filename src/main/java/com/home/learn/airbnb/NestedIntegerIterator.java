@@ -1,4 +1,4 @@
-package com.home.learn.leetcode;
+package com.home.learn.airbnb;
 
 import com.home.learn.library.NestedInteger;
 
@@ -23,7 +23,6 @@ public class NestedIntegerIterator implements Iterator<Integer> {
             curValue = null;
             return toRet;
         }
-
         if (curIterator != null) {
             if(curIterator.hasNext()) {
                 return curIterator.next();
@@ -31,12 +30,9 @@ public class NestedIntegerIterator implements Iterator<Integer> {
                 curIterator = null;
             }
         }
-
         while(index < nestedList.size()) {
             NestedInteger nestedInteger = nestedList.get(index);
             index++;
-
-            //return if integer
             if (nestedInteger.isInteger()) {
                 return nestedInteger.getInteger();
             } else {
@@ -44,7 +40,6 @@ public class NestedIntegerIterator implements Iterator<Integer> {
                 return next();
             }
         }
-
         return null;
     }
 
