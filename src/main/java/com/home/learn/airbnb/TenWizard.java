@@ -2,85 +2,51 @@ package com.home.learn.airbnb;
 
 import java.util.*;
 
+/*
+Assumption:
+1. The input is a list of list, such as [[1, 2], [1,4], [3,4]...], represents 1 know 2 and 4, 3 know 4
+2. The cost between two node are the square of diff.
+3. return the min cost from one number to another number
+4. if can not reach another number, we return -1
+
+==========================
+ */
+
 public class TenWizard {
-    public static void main(String[] args) {
-    TenWizard sol = new TenWizard();
-    int[][] wizards = new int[][] {
-            {5},
-            {3},
-            {4, 7},
-            {4},
-            {8},
-            {2},
-            {8, 9},
-            {9},
-            {9},
-            {1, 2, 3}
-    };
-    List<List<Integer>> wizardList = new ArrayList<>();
-    for (int i = 0; i < wizards.length; i++) {
-        wizardList.add(new ArrayList<>());
-        for (int j = 0; j < wizards[i].length; j++) {
-            wizardList.get(i).add(wizards[i][j]);
-        }
-    }
-    System.out.println(sol.findMinCost(wizardList, 0, 9).path);
-    System.out.println(sol.findMinCost(wizardList, 0, 9).cost);
-}
-
-    public Result findMinCost(List<List<Integer>> wizards, int from, int to) {
-        int[] minCost = new int[wizards.size()];  // the min cost for each wizard so far
-        Arrays.fill(minCost, Integer.MAX_VALUE);
-        minCost[from] = 0;
-        Queue<Wizard> pq = new PriorityQueue<>(Comparator.comparingInt(o -> o.cost));
-        Set<Integer> closed = new HashSet<>();
-        pq.offer(new Wizard(from, 0, null));
-        while (!pq.isEmpty()) {
-            Wizard curr = pq.poll();
-            if (closed.contains(curr.id)) continue;
-            closed.add(curr.id);
-            if (curr.id == to) {
-                return new Result(curr.cost, getPath(curr));
+    public int findMinCost(int[][] wizards, int from, int to) {
+        if(from == to) return 0;
+        Map<Integer, Set<Integer>> graph = buildGraph(wizards);
+        Set<Integer> visited = new HashSet<>();
+        Queue<Integer> bfs = new ArrayDeque<>();
+        int cost = 0;
+        int count = 1;
+        bfs.add(from);
+        while(!bfs.isEmpty()) {
+            for(int i = 0; i < count; i++) {
+                Set<Integer> children = graph.getOrDefault(bfs.poll(), new HashSet<>());
+                for(Integer j : children) {
+                    if(j == to) {
+                        return ++cost;
+                    } else if(!visited.contains(j)) {
+                        bfs.add(j);
+                        visited.add(j);
+                    }
+                }
             }
-            for (int next : wizards.get(curr.id)) {
-                int cost = curr.cost + (next - curr.id) * (next - curr.id);
-                if (cost >= minCost[next]) continue;
-                minCost[next] = cost;
-                pq.offer(new Wizard(next, cost, curr));
-            }
+            cost++;
+            count = bfs.size();
         }
-        return null;
+        return -1;
     }
 
-    private List<Integer> getPath(Wizard end) {
-        List<Integer> list = new ArrayList<>();
-        while (end != null) {
-            list.add(end.id);
-            end = end.from;
+    private Map<Integer, Set<Integer>> buildGraph(int[][] wizards) {
+        Map<Integer, Set<Integer>> result = new HashMap<>();
+        for(int[] w : wizards) {
+            Set<Integer> temp = result.getOrDefault(w[0], new HashSet<>());
+            temp.add(w[1]);
+            result.put(w[0], temp);
         }
-        Collections.reverse(list);
-        return list;
-    }
-
-    static class Result {
-        int cost;
-        List<Integer> path;
-
-        public Result(int cost, List<Integer> path) {
-            this.cost = cost;
-            this.path = path;
-        }
-    }
-    static class Wizard {
-        int id;
-        int cost;
-        Wizard from;
-
-        public Wizard(int id, int cost, Wizard from) {
-            this.id = id;
-            this.cost = cost;
-            this.from = from;
-        }
+        return result;
     }
 }
 

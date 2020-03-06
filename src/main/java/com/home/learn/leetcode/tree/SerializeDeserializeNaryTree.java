@@ -9,18 +9,14 @@ public class SerializeDeserializeNaryTree {
         public Node(int val) {
             this.val = val;
         }
-        public Node(int val, List<Node> children) {
-            this.val = val;
-            this.children = children;
-        }
     }
 
     String NN="X";
     String spliter=",";
     // Encodes a tree to a single string.
     public String serialize(Node root) {
-        StringBuilder sb=new StringBuilder();
-        buildString(root,sb);
+        StringBuilder sb = new StringBuilder();
+        buildString(root, sb);
         return sb.toString();
     }
     private void buildString(Node node, StringBuilder sb){

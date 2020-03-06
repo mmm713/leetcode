@@ -34,14 +34,10 @@ public class DualIterator<T extends Comparable<T>> implements Iterator<T> {
                     return val;
                 } else {
                     buffer.offer(val);
-                    toCompare = swap(toCompare);
-                    return buffer.poll();
                 }
-            } else {
-                toCompare = swap(toCompare);
-                return buffer.poll();
             }
-
+            toCompare = swap(toCompare);
+            return buffer.poll();
         } else if(iterator0.hasNext() && iterator1.hasNext()) {
             T val0 = iterator0.next();
             T val1 = iterator1.next();

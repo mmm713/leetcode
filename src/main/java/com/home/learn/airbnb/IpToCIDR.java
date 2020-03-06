@@ -6,10 +6,9 @@ import java.util.List;
 public class IpToCIDR {
     public List<String> ipToCIDR(String ip, int n) {
         long start = ipToLong(ip);
-        List<String> ans = new ArrayList();
+        List<String> ans = new ArrayList<>();
         while (n > 0) {
-            int mask = Math.max(33 - bitLength(Long.lowestOneBit(start)),
-                    33 - bitLength(n));
+            int mask = Math.max(33 - bitLength(Long.lowestOneBit(start)), 33 - bitLength(n));
             ans.add(longToIP(start) + "/" + mask);
             start += 1 << (32 - mask);
             n -= 1 << (32 - mask);
@@ -24,8 +23,7 @@ public class IpToCIDR {
         return ans;
     }
     private String longToIP(long x) {
-        return String.format("%s.%s.%s.%s",
-                x >> 24, (x >> 16) % 256, (x >> 8) % 256, x % 256);
+        return String.format("%s.%s.%s.%s", x >> 24, (x >> 16) % 256, (x >> 8) % 256, x % 256);
     }
     private int bitLength(long x) {
         if (x == 0) return 1;

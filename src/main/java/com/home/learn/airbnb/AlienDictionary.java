@@ -19,7 +19,7 @@ public class AlienDictionary {
     private String toplogyPrint(boolean[][] edges, int[] inDegree) {
         int wordCount = 0;
         StringBuilder sb = new StringBuilder();
-        Queue<Integer> topo = new ArrayDeque<Integer>(26);
+        Queue<Integer> topo = new ArrayDeque<>(26);
         for(int i = 0; i < 26; i++) {
             if(inDegree[i] == 0) {
                 topo.offer(i);
