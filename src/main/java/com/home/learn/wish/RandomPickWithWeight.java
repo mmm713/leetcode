@@ -9,25 +9,19 @@ import java.util.*;
 pickIndex will be called at most 10000 times
  */
 public class RandomPickWithWeight {
-
-    Random rand;
-    int[] prefixSum;
+    double[] prob;
 
     public RandomPickWithWeight(int[] w) {
-        rand = new Random();
-        prefixSum = new int[w.length];
-        prefixSum[0] = w[0];
-        for (int i = 1; i < w.length; i++) {
-            prefixSum[i] = prefixSum[i-1] + w[i];
+        prob = new double[w.length];
+        double sum = Arrays.stream(w).sum();
+        for(int i = 0; i < w.length; i++) {
+            w[i] += i == 0 ? 0 : w[i - 1];
+            prob[i] = w[i] / sum;
         }
     }
 
     public int pickIndex() {
-        int totalWeight = prefixSum[prefixSum.length-1];
-        int accWeight = rand.nextInt(totalWeight) + 1;  // this is accumulated weight
-        int idx = Arrays.binarySearch(prefixSum, accWeight);
-        if (idx < 0) idx = -(idx+1);
-        return idx;
+        return Math.abs(Arrays.binarySearch(prob, Math.random())) - 1;
     }
 }
 
@@ -65,8 +59,7 @@ class RandomPickWithNonNegativeWeight {   // Notice: weight can be 0
     public int pickIndex() {
         int max = preSum[preSum.length-1];
         int weight = rand.nextInt(max) + 1;   // range [1,max]
-        int idx = binarySearch(weight);
-        return idx;
+        return binarySearch(weight);
     }
 
     private int binarySearch(int target) {  // find the leftmost index

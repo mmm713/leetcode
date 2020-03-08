@@ -17,14 +17,11 @@ public class PeopleRelationship {
 
     private void dfs(Map<String, Map<String, String>> map, String start, String end,
                      StringBuilder path, List<String> ans, Set<String> visited) {
-
         if (start.equals(end)) {
             ans.add(path.toString());
             return;
         }
-
         if (!map.containsKey(start)) return;
-
         visited.add(start);
         for (String next : map.get(start).keySet()) {
             if (visited.contains(next)) continue;
@@ -38,9 +35,7 @@ public class PeopleRelationship {
 
 
     public static void main(String[] args) {
-
         PeopleRelationship obj = new PeopleRelationship();
-
         String[][] relations = {
                 {"Bart", "brother", "Lisa"},
                 {"Bart", "son", "Homer"},
@@ -48,12 +43,10 @@ public class PeopleRelationship {
                 {"Lisa", "daughter", "Homer"},
                 {"Homer", "father", "Bart"}   // form a cycle  -> no problem. Has a visited set.
         };
-
         List<String> paths = obj.getRelationSequence(relations, "Bart", "Homer");
         for (String path : paths)
             System.out.println(path);
     }
-
 }
 
 
@@ -61,7 +54,6 @@ public class PeopleRelationship {
 Follow-up: Allow duplicated relations between two people -> add a nested for-loop
  */
 class PeopleRelationshipDuplicated {
-
     public List<String> getRelationSequence(String[][] relations, String name1, String name2) {
         Map<String, Map<String, List<String>>> map = new HashMap<>();
         for (String[] pair : relations) {
@@ -76,14 +68,11 @@ class PeopleRelationshipDuplicated {
 
     private void dfs(Map<String, Map<String, List<String>>> map, String start, String end,
                      StringBuilder path, List<String> ans, Set<String> visited) {
-
         if (start.equals(end)) {
             ans.add(path.toString());
             return;
         }
-
         if (!map.containsKey(start)) return;
-
         visited.add(start);
         for (String next : map.get(start).keySet()) {
             if (visited.contains(next)) continue;
@@ -99,9 +88,7 @@ class PeopleRelationshipDuplicated {
 
 
     public static void main(String[] args) {
-
         PeopleRelationshipDuplicated obj = new PeopleRelationshipDuplicated();
-
         String[][] relations = {
                 {"Bart", "sister", "Lisa"},
                 {"Bart", "brother", "Lisa"},

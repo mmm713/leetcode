@@ -101,7 +101,7 @@ class MinStackUsingTwoStacks {
 
 class MinStackUsingSelfImplementedList {
 
-    class Node {
+    static class Node {
         int val;
         int min;
         Node next;
@@ -122,7 +122,7 @@ class MinStackUsingSelfImplementedList {
         if (head == null) {
             head = new Node(x, x, null);
         } else {
-            head = new Node(x, Math.min(x,head.min), head);
+            head = new Node(x, Math.min(x, head.min), head);
         }
     }
 
