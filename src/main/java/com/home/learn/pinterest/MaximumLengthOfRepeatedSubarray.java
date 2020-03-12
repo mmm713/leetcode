@@ -1,45 +1,46 @@
 package com.home.learn.pinterest;
 
-import java.math.BigInteger;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MaximumLengthOfRepeatedSubarray {
-    //O((M+N)∗log(min(M,N)))
-    int P = 113;
-    int MOD = 1_000_000_007;
-    int Pinv = BigInteger.valueOf(P).modInverse(BigInteger.valueOf(MOD)).intValue();
-
-    private int[] rolling(int[] source, int length) {
-        int[] ans = new int[source.length - length + 1];
-        long h = 0, power = 1;
-        if (length == 0) return ans;
-        for (int i = 0; i < source.length; ++i) {
-            h = (h + source[i] * power) % MOD;
-            if (i < length - 1) {
-                power = (power * P) % MOD;
-            } else {
-                ans[i - (length - 1)] = (int) h;
-                h = (h - source[i - (length - 1)]) * Pinv % MOD;
-                if (h < 0) h += MOD;
+    /*
+    Time Complexity: O(M*N)O(M∗N), where M, NM,N are the lengths of A, B.
+    Space Complexity: O(M*N)O(M∗N), the space used by dp.
+     */
+    public int findLengthDP(int[] A, int[] B) {
+        int ans = 0;
+        int[][] memo = new int[A.length + 1][B.length + 1];
+        for (int i = A.length - 1; i >= 0; --i) {
+            for (int j = B.length - 1; j >= 0; --j) {
+                if (A[i] == B[j]) {
+                    memo[i][j] = memo[i+1][j+1] + 1;
+                    if (ans < memo[i][j]) ans = memo[i][j];
+                }
             }
         }
         return ans;
     }
 
-    private boolean check(int guess, int[] A, int[] B) {
-        Map<Integer, List<Integer>> hashes = new HashMap<>();
-        int k = 0;
-        for (int x: rolling(A, guess)) {
-            hashes.computeIfAbsent(x, z -> new ArrayList<>()).add(k++);
+    /*
+    Time Complexity: O((M + N) * \min(M, N) * \log{(\min(M, N))})O((M+N)∗min(M,N)∗log(min(M,N))),
+    where M, NM,N are the lengths of A, B. The log factor comes from the binary search.
+    The complexity of our naive check of a given \text{length}length is O((M+N) * \text{length})O((M+N)∗length),
+     as we will create the seen strings with complexity O(M * \text{length})O(M∗length), then search
+     for them with complexity O(N * \text{length})O(N∗length), and our total complexity when performing our check is the addition of these two.
+
+    Space Complexity: O(M^2), the space used by seen.
+     */
+    public boolean check(int length, int[] A, int[] B) {
+        Set<String> seen = new HashSet<>();
+        for (int i = 0; i + length <= A.length; ++i) {
+            seen.add(Arrays.toString(Arrays.copyOfRange(A, i, i+length)));
         }
-        int j = 0;
-        for (int x: rolling(B, guess)) {
-            for (int i: hashes.getOrDefault(x, new ArrayList<>()))
-                if (Arrays.equals(Arrays.copyOfRange(A, i, i+guess),
-                        Arrays.copyOfRange(B, j, j+guess))) {
-                    return true;
-                }
-            j++;
+        for (int j = 0; j + length <= B.length; ++j) {
+            if (seen.contains(Arrays.toString(Arrays.copyOfRange(B, j, j+length)))) {
+                return true;
+            }
         }
         return false;
     }
@@ -52,20 +53,5 @@ public class MaximumLengthOfRepeatedSubarray {
             else hi = mi;
         }
         return lo - 1;
-    }
-
-    public int findLengthDP(int[] A, int[] B) {
-        int[][] dp = new int[A.length+1][B.length+1];
-        int res = 0;
-
-        for(int i=1;i<=A.length;i++){
-            for(int j=1;j<=B.length;j++){
-                if(A[i-1]==B[j-1]){
-                    dp[i][j] = dp[i-1][j-1]+1;
-                    res = Math.max(res,dp[i][j]);
-                }
-            }
-        }
-        return res;
     }
 }

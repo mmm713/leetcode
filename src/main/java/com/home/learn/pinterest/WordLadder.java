@@ -5,11 +5,9 @@ import java.util.*;
 public class WordLadder {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         Set<String> wordSet = new HashSet<>(wordList);
-
         if (!wordSet.contains(endWord)) {
             return 0;
         }
-
         // Two-way BFS
         Set<String> beginSet = new HashSet<>();
         Set<String> endSet = new HashSet<>();
@@ -46,13 +44,11 @@ public class WordLadder {
             }
             dist++;
         }
-
         return 0;
     }
 
     private List<String> getNeighbors(Set<String> wordSet, String word) {
         List<String> res = new ArrayList<>();
-
         for (int i = 0; i < word.length(); i++) {
             char[] A = word.toCharArray();
 
@@ -64,7 +60,6 @@ public class WordLadder {
                 }
             }
         }
-
         return res;
     }
 
