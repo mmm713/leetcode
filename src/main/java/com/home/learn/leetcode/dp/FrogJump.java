@@ -1,4 +1,4 @@
-package com.home.learn.pinterest;
+package com.home.learn.leetcode.dp;
 
 import java.util.HashMap;
 import java.util.HashSet;

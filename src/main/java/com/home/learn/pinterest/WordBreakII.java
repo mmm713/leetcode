@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class WordBreakII {
-    //复杂度 n^3
+    //复杂度 时空都是 n^3
     public List<String> WordBreakII(String s, List<String> wordDict) {
         List<String> result = new ArrayList<>();
         int max = 0;
@@ -30,8 +30,7 @@ public class WordBreakII {
             String substring = s.substring(start, start + i + 1);
             if(wordDict.contains(substring) && possible[start + i + 1]) {
                 int oldSize = result.size();
-                wordBreakDFS(s, wordDict, start + i + 1, max,
-                        toAdd + " " + substring, result, possible);
+                wordBreakDFS(s, wordDict, start + i + 1, max, toAdd + " " + substring, result, possible);
                 if(result.size() == oldSize) possible[start + i + 1] = false;
             }
         }

@@ -46,12 +46,12 @@ public class MaximumLengthOfRepeatedSubarray {
     }
 
     public int findLength(int[] A, int[] B) {
-        int lo = 0, hi = Math.min(A.length, B.length) + 1;
-        while (lo < hi) {
-            int mi = (lo + hi) / 2;
-            if (check(mi, A, B)) lo = mi + 1;
-            else hi = mi;
+        int l = 0, r = Math.min(A.length, B.length) + 1;
+        while (l < r) {
+            int mi = (l + r) / 2;
+            if (check(mi, A, B)) l = mi + 1;
+            else r = mi;
         }
-        return lo - 1;
+        return l - 1;
     }
 }

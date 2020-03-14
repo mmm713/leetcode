@@ -3,6 +3,7 @@ package com.home.learn.pinterest;
 import java.util.*;
 
 public class WordBreak {
+    //N方时间，n空间
     public boolean wordBreak(String s, List<String> wordDict) {
         Set<String> wordDictSet=new HashSet<>(wordDict);
         Queue<Integer> queue = new LinkedList<>();
