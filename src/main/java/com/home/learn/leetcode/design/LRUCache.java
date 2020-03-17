@@ -1,4 +1,4 @@
-package com.home.learn.leetcode;
+package com.home.learn.leetcode.design;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;

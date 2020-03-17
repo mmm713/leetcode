@@ -1,0 +1,39 @@
+package com.home.learn.google;
+
+import java.util.*;
+
+public class NetworkDelayTime {
+    public int networkDelayTime(int[][] times, int N, int K) {
+        Map<Integer, List<int[]>> graph = new HashMap<>();
+        for (int[] edge: times) {
+            if (!graph.containsKey(edge[0]))
+                graph.put(edge[0], new ArrayList<>());
+            graph.get(edge[0]).add(new int[]{edge[1], edge[2]});
+        }
+        PriorityQueue<int[]> heap = new PriorityQueue<>(
+                Comparator.comparingInt(info -> info[0]));
+        heap.offer(new int[]{0, K});
+
+        Map<Integer, Integer> dist = new HashMap<>();
+        int ans = 0;
+
+        while (!heap.isEmpty()) {
+            int[] info = heap.poll();
+            int d = info[0], node = info[1];
+            if (dist.containsKey(node)) continue;
+            dist.put(node, d);
+            ans = Math.max(ans, d);
+            if (graph.containsKey(node)) {
+                for (int[] edge: graph.get(node)) {
+                    int nei = edge[0], d2 = edge[1];
+                    if (!dist.containsKey(nei)) {
+                        heap.offer(new int[]{d + d2, nei});
+                    }
+                }
+            }
+        }
+
+        if (dist.size() != N) return -1;
+        return ans;
+    }
+}
