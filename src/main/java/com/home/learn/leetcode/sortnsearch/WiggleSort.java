@@ -1,5 +1,7 @@
 package com.home.learn.leetcode.sortnsearch;
 
+import java.util.Arrays;
+
 public class WiggleSort {
     public void wiggleSort(int[] nums) {
         for (int i = 0; i < nums.length - 1; i++) {
@@ -62,5 +64,20 @@ public class WiggleSort {
         if((i - j == 2) && (i - 1 == nums.length - k))  return pivot;
         if(j >= (nums.length - k))  return quickSelect(nums, k, left, j);
         else return quickSelect(nums, k, i, right);
+    }
+
+    public void wiggleSortIII(int[] nums) {
+        int[] tmp = new int[nums.length];
+        System.arraycopy(nums, 0, tmp, 0, nums.length);
+        Arrays.sort(tmp);
+        int mid = (nums.length + 1) >> 1;
+        int left = mid - 1;
+        int right = nums.length - 1;
+        int i = 0;
+        while (left >= 0 && right >= mid) {
+            nums[i++] = tmp[left--];
+            nums[i++] = tmp[right--];
+        }
+        while (left >= 0) nums[i++] = tmp[left--];
     }
 }
