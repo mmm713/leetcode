@@ -4,7 +4,7 @@ plugins {
 
 apply plugin: 'idea'
 group 'com.home.learn'
-version '1.0-SNAPSHOT'
+version '1.0-Release'
 
 sourceCompatibility = 1.8
 
@@ -17,7 +17,10 @@ test {
 }
 
 dependencies {
-    implementation("com.google.guava:guava:28.2-jre")
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.3'
+    compile group: 'com.google.guava', name: 'guava', version: '28.2-jre'
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
 }

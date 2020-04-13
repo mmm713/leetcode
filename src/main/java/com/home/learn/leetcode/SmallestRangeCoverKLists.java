@@ -1,10 +1,11 @@
 package com.home.learn.leetcode;
 
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class SmallestRangeCover {
+public class SmallestRangeCoverKLists {
     public int[] smallestRange(List<List<Integer>> nums) {
         PriorityQueue<int[]> minHeap = new PriorityQueue<>(nums.size(), Comparator.comparingInt(o -> o[0]));
         int max = nums.get(0).get(0);
