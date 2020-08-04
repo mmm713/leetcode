@@ -2,7 +2,7 @@ package com.home.learn.pinterest;
 
 public class NextPermutation {
     public void nextPermutation(int[] nums) {
-        int j = 0;
+        int j;
         for(int i = nums.length - 2; i >= 0; i--) {
             if(nums[i + 1] > nums[i]) {
                 for(j = nums.length - 1; j >= i; j--) {

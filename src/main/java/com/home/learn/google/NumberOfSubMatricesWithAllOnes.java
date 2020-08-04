@@ -1,6 +1,7 @@
 package com.home.learn.google;
 
-import javafx.util.Pair;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Stack;
 
@@ -42,7 +43,7 @@ public class NumberOfSubMatricesWithAllOnes {
                 }
                 tempSum += p_arr[i][j];
                 ans += tempSum;
-                stack.add(new Pair<>(p_arr[i][j], count));
+                stack.add(Pair.of(p_arr[i][j], count));
             }
         }
         return ans;
