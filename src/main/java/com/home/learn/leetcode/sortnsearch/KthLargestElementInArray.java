@@ -6,7 +6,7 @@ public class KthLargestElementInArray {
     }
     private int quickSelect(int[] nums, int k, int left, int right)
     {
-        int i = left, j = right, temp = 0, pivot = nums[left + (right - left) / 2];
+        int i = left, j = right, temp, pivot = nums[left + (right - left) / 2];
         if(j - i == 1) {
             if(j == nums.length - k)  return Math.max(nums[j], nums[i]);
             else  return Math.min(nums[j], nums[i]);
