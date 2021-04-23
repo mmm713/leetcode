@@ -17,12 +17,11 @@ public class TreeToDoubleList {
         inOrder(root.left, headTail);
         if(headTail[0] == null) {
             headTail[0] = root;
-            headTail[1] = root;
         } else {
             headTail[1].right = root;
             root.left = headTail[1];
-            headTail[1] = root;
         }
+        headTail[1] = root;
         inOrder(root.right, headTail);
     }
 }
