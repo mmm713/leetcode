@@ -4,18 +4,17 @@ import com.home.learn.library.NestedInteger;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Stack;
 
 public class NestedIntegerIteratorV3 implements Iterator<Integer> {
 
-    Stack<ListIterator<NestedInteger>> stack;
+    Stack<Iterator<NestedInteger>> stack;
     NestedInteger current;
 
     public NestedIntegerIteratorV3(List<NestedInteger> nestedList) {
         stack = new Stack<>();
         current = null;
-        stack.push(nestedList.listIterator());
+        stack.push(nestedList.iterator());
     }
 
 
@@ -35,7 +34,7 @@ public class NestedIntegerIteratorV3 implements Iterator<Integer> {
             return true;
         }
         while(!stack.isEmpty()){
-            ListIterator<NestedInteger> peek = stack.peek();
+            Iterator<NestedInteger> peek = stack.peek();
             if(peek.hasNext()){
                 NestedInteger curr = peek.next();
                 if(curr.isInteger()){

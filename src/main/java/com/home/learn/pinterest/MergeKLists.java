@@ -3,6 +3,7 @@ package com.home.learn.pinterest;
 import com.home.learn.library.ListNode;
 
 public class MergeKLists {
+    //T(k) = 2T(k/2)+O(n*k)
     public ListNode mergeKLists(ListNode[] lists) {
         if(lists.length < 1) return null;
         int end = lists.length - 1;
