@@ -7,7 +7,7 @@ public class MaxStack {
     int max = Integer.MIN_VALUE;
 
     public MaxStack() {
-        stack = new Stack();
+        stack = new Stack<>();
     }
 
     public void push(int x) {

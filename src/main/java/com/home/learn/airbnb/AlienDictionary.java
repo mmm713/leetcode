@@ -13,27 +13,27 @@ public class AlienDictionary {
 
     public String alienOrder(String[] words) {
         buildGraph(words);
-        return toplogyPrint(edges, inDegree);
+        return topologyPrint(edges, inDegree);
     }
 
-    private String toplogyPrint(boolean[][] edges, int[] inDegree) {
+    private String topologyPrint(boolean[][] edges, int[] inDegree) {
         int wordCount = 0;
         StringBuilder sb = new StringBuilder();
-        Queue<Integer> topo = new ArrayDeque<>(26);
+        Queue<Integer> q = new ArrayDeque<>(26);
         for(int i = 0; i < 26; i++) {
             if(inDegree[i] == 0) {
-                topo.offer(i);
+                q.offer(i);
                 wordCount++;
             } else if(inDegree[i] > 0) {
                 wordCount++;
             }
         }
-        while(!topo.isEmpty()) {
-            int word = topo.poll();
+        while(!q.isEmpty()) {
+            int word = q.poll();
             sb.append((char) ('a' + word));
             for(int i = 0; i < 26; i++) {
                 if(edges[word][i] && --inDegree[i] == 0) {
-                    topo.offer(i);
+                    q.offer(i);
                 }
             }
             wordCount--;
@@ -71,5 +71,34 @@ public class AlienDictionary {
                 }
             }
         }
+    }
+
+    //verify alien
+
+    int[] map;
+
+    public boolean isAlienSorted(String[] words, String order) {
+        map = new int[order.length()];
+        for(int i = 0; i < order.length(); i++){
+            map[order.charAt(i) - 'a'] = i;
+        }
+
+        for(int i = 1; i < words.length; i++){
+            if(!verifyOrder(words[i - 1], words[i]))
+                return false;
+        }
+        return true;
+    }
+
+    private boolean verifyOrder(String s1, String s2){
+        for(int i = 0; i < Math.min(s1.length(), s2.length()); i++) {
+            int val1 = map[s1.charAt(i) - 'a'];
+            int val2 = map[s2.charAt(i) - 'a'];
+            if(val1 < val2)
+                return true;
+            else if(val1 > val2)
+                return false;
+        }
+        return s1.length() <= s2.length();
     }
 }

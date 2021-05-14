@@ -23,11 +23,18 @@ public class WordSearch {
         return false;
     }
     //Word Search II
+    //O(4^(min(Y, NM))*NM)
+    /*
+        N = num of rows
+        M = num of columns
+        X = number of words in dictionary
+        Y = avg length of words in dictionary
+    */
     public List<String> findWords(char[][] board, String[] words) {
         List<String> result = new ArrayList<>();
         TrieNode root = buildTrie(words);
 
-        for(int i = 0; i< board.length; i++) {
+        for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board[0].length; j++) {
                 dfs(board, result, root, i, j);
             }
@@ -56,7 +63,7 @@ public class WordSearch {
             TrieNode node = root;
             for(char c : word.toCharArray()) {
                 if(node.children[c -'a'] == null) {
-                    node.children[c-'a'] = new TrieNode();
+                    node.children[c - 'a'] = new TrieNode();
                 }
                 node = node.children[c-'a'];
             }
@@ -66,13 +73,10 @@ public class WordSearch {
     }
 
     public void dfs(char[][] board, List<String> result, TrieNode node, int i, int j) {
-        if(i < 0 || i >= board.length || j < 0 || j >= board[0].length || board[i][j] == '#') {
+        if(node.children[board[i][j] - 'a'] == null) {
             return;
         }
-        if(node.children[board[i][j] -'a'] == null) {
-            return;
-        }
-        node = node.children[board[i][j] -'a'];
+        node = node.children[board[i][j] - 'a'];
 
         if(node.word != null) {
             result.add(node.word);
@@ -80,10 +84,15 @@ public class WordSearch {
         }
         char c = board[i][j];
         board[i][j] = '#';
-        dfs(board, result, node, i+1, j);
-        dfs(board, result, node, i-1, j);
-        dfs(board, result, node, i, j+1);
-        dfs(board, result, node, i, j-1);
+        for (int[] direction : directions) {
+            int x = i + direction[0];
+            int y = j + direction[1];
+            if(x >= 0 && x < board.length
+                    && y >= 0 && y < board[0].length
+                    && board[x][y] != '#') {
+                dfs(board, result, node, x, y);
+            }
+        }
         board[i][j] = c;
     }
 }

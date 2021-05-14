@@ -16,19 +16,19 @@ public class BinaryTreeZigZagOrderTraversal {
         q.offer(null);
 
         LinkedList<Integer> temp = new LinkedList<>();
-        boolean is_order_left = true;
+        boolean orderLeft = true;
 
         while (q.size() > 0) {
-            TreeNode curr_node = q.poll();
-            if (curr_node != null) {
-                if (is_order_left)
-                    temp.addLast(curr_node.val);
+            TreeNode curr = q.poll();
+            if (curr != null) {
+                if (orderLeft)
+                    temp.addLast(curr.val);
                 else
-                    temp.addFirst(curr_node.val);
-                if (curr_node.left != null)
-                    q.offer(curr_node.left);
-                if (curr_node.right != null)
-                    q.offer(curr_node.right);
+                    temp.addFirst(curr.val);
+                if (curr.left != null)
+                    q.offer(curr.left);
+                if (curr.right != null)
+                    q.offer(curr.right);
             } else {
                 // we finish the scan of one level
                 results.add(temp);
@@ -36,7 +36,7 @@ public class BinaryTreeZigZagOrderTraversal {
                 // prepare for the next level
                 if (q.size() > 0)
                     q.offer(null);
-                is_order_left = !is_order_left;
+                orderLeft = !orderLeft;
             }
         }
         return results;
