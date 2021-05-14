@@ -9,8 +9,8 @@ public class AddTwoNumbers {
         ListNode r1 = l1, r2 = l2, previous = null;
         int carry = 0;
         while(r1 != null) {
-            if(r1 != null && r2 != null) {
-                int temp = r1.val;
+            int temp = r1.val;
+            if(r2 != null) {
                 r1.val = (r1.val + r2.val + carry) % 10;
                 carry = (temp + r2.val + carry) / 10;
                 if(r1.next == null)  {
@@ -23,8 +23,7 @@ public class AddTwoNumbers {
                     r1 = r1.next;
                     r2 = r2.next;
                 }
-            } else if(r2 == null) {
-                int temp = r1.val;
+            } else {
                 r1.val = (r1.val + carry) % 10;
                 carry = (carry + temp) / 10;
                 previous = r1;
@@ -32,8 +31,7 @@ public class AddTwoNumbers {
             }
         }
         if(carry > 0)  {
-            ListNode add = new ListNode(carry);
-            previous.next = add;
+            previous.next = new ListNode(carry);
         }
         return l1;
     }

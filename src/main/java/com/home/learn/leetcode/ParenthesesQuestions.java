@@ -34,7 +34,7 @@ public class ParenthesesQuestions {
             if (stack >= 0) continue;
             for (int j = last_j; j <= i; ++j)
                 if (s.charAt(j) == par[1] && (j == last_j || s.charAt(j - 1) != par[1]))
-                    remove(s.substring(0, j) + s.substring(j + 1, s.length()), ans, i, j, par);
+                    remove(s.substring(0, j) + s.substring(j + 1), ans, i, j, par);
             return;
         }
         String reversed = new StringBuilder(s).reverse().toString();
@@ -53,7 +53,7 @@ public class ParenthesesQuestions {
             if (stack == -1) {
                 for (int j = last_j; j <= i; ++j) {
                     if (s.charAt(j) == ')' && (j == last_j || s.charAt(j - 1) != ')')) {
-                        removeRight(s.substring(0, j) + s.substring(j + 1, s.length()), ans, i, j);
+                        removeRight(s.substring(0, j) + s.substring(j + 1), ans, i, j);
                     }
                 }
                 return;
@@ -70,7 +70,7 @@ public class ParenthesesQuestions {
             if (stack == -1) {
                 for (int j = last_j; j >= i; --j) {
                     if (s.charAt(j) == '(' && (j == last_j || s.charAt(j + 1) != '(')) {
-                        removeLeft(s.substring(0, j) + s.substring(j + 1, s.length()), ans, i - 1, j - 1);
+                        removeLeft(s.substring(0, j) + s.substring(j + 1), ans, i - 1, j - 1);
                     }
                 }
                 return;
@@ -103,5 +103,56 @@ public class ParenthesesQuestions {
             lo = Math.max(lo, 0);
         }
         return lo == 0;
+    }
+
+    public int minAddToMakeValid(String s) {
+        int count = 0, res = 0;
+        char[] sc = s.toCharArray();
+        for(char c: sc) {
+            if(c == '(') {
+                count++;
+            } else {
+                if(--count < 0) {
+                    res++;
+                    count = 0;
+                }
+            }
+        }
+        return res + count;
+    }
+
+
+    public String minRemoveToMakeValid(String s) {
+        if (s == null || s.length() == 0)
+            return s;
+        int left = 0;
+        char[] sc = s.toCharArray();
+        for (int i = 0; i < sc.length; i++) {
+            char c = sc[i];
+            if (c == '(') {
+                left++;
+            } else if (c == ')') {
+                if (--left < 0) {
+                    sc[i] = '#';
+                    left = 0;
+                }
+            }
+        }
+        int j = sc.length - 1;
+        while(left > 0) {
+            char c = sc[j];
+            if (c == '(') {
+                sc[j] = '#';
+                left--;
+            }
+            j--;
+        }
+        int idx = 0;
+        for (int i = 0; i < sc.length; i++) {
+            if (sc[i] != '#') {
+                sc[idx++] = sc[i];
+            }
+        }
+        return new String(sc, 0, idx);
     }
 }
