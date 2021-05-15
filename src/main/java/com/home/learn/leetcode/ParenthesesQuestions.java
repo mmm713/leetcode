@@ -44,6 +44,11 @@ public class ParenthesesQuestions {
             ans.add(reversed);
     }
 
+    public List<String> removeInvalidParenthesesLR(String s) {
+        List<String> ans = new ArrayList<>();
+        removeRight(s, ans, 0, 0);
+        return ans;
+    }
 
     public void removeRight(String s, List<String> ans, int last_i, int last_j) {
         int stack = 0;

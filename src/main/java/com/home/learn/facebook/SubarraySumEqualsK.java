@@ -19,4 +19,26 @@ public class SubarraySumEqualsK {
         }
         return res;
     }
+
+    //if all positive
+    public boolean subarraySumPositive(int[] nums, int k) {
+        int start = -1;
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+            if (sum == k) {
+                return true;
+            } else if (sum > k) {
+                while (start < k) {
+                    sum -= nums[++start];
+                    if (sum == k) {
+                        return true;
+                    } else if (sum < k) {
+                        break;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }
