@@ -79,10 +79,7 @@ public class ValidTicTacToeState {
         if(numberOfWinsX >= 1 && numberOfWinsO >= 1) return false;
         else {
             if(numberOfWinsX >= 1 && moves == 0) return false;
-            if(numberOfWinsO >= 1 && moves == 1) return false;
+            return numberOfWinsO < 1 || moves != 1;
         }
-
-
-        return true;
     }
 }

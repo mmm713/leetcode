@@ -12,12 +12,12 @@ public class MinimumWindowSubstring {
             if(--hash[s.charAt(i)] >= 0) {
                 counter--;
             }
-            while(counter <= 0) {
+            while(counter == 0) {
                 if(i - left < window) {
                     start = left;
                     window = i - left;
                 }
-                if(hash[s.charAt(left++)]++ >= 0) {
+                if(hash[s.charAt(left++)] >= 0) {
                     counter++;
                 }
             }

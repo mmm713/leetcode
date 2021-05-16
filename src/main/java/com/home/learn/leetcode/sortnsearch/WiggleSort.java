@@ -3,6 +3,26 @@ package com.home.learn.leetcode.sortnsearch;
 import java.util.Arrays;
 
 public class WiggleSort {
+    public int wiggleMaxLength(int[] nums) {
+        int result = 1;
+        if(nums.length < 1) return 0;
+        boolean state = false, prev = false, curr = false;
+        for(int i = 1; i < nums.length; i++) {
+            curr = (nums[i] - nums[i - 1]) > 0;
+            if(nums[i] != nums[i - 1]) {
+                if(!state) {
+                    result++;
+                    prev = curr;
+                    state = true;
+                } else if(prev == !curr) {
+                    result++;
+                    prev = curr;
+                }
+            }
+        }
+        return result;
+    }
+
     public void wiggleSort(int[] nums) {
         for (int i = 0; i < nums.length - 1; i++) {
             if ((i % 2 == 0) == nums[i] > nums[i + 1]) {

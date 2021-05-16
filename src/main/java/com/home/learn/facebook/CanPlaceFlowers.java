@@ -15,4 +15,18 @@ public class CanPlaceFlowers {
         }
         return n == 0;
     }
+
+    public int totalFlowers(int[] flowerbed) {
+        int l = 1, res = 0;
+        for(int f : flowerbed) {
+            if(f == 1) {
+                res += (l - 1) / 2;
+                l = 0;
+            } else {
+                l++;
+            }
+        }
+        res += l / 2;
+        return res;
+    }
 }

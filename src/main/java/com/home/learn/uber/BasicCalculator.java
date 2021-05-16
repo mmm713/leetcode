@@ -3,6 +3,7 @@ package com.home.learn.uber;
 import java.util.Stack;
 
 public class BasicCalculator {
+    //只有加减括号
     public int calculate(String s) {
         Stack<Integer> stack = new Stack<>();
         int result = 0;
@@ -38,6 +39,7 @@ public class BasicCalculator {
         return result;
     }
 
+    //只有加减乘除
     public int calculateII(String s) {
         Stack<String> stack = new Stack<>();
         String d = "";
@@ -63,22 +65,22 @@ public class BasicCalculator {
         return stack.stream().map(Integer::parseInt).reduce(0, Integer::sum);
     }
 
-    //i = new int[1];
-    private int calculateIII(String s, int[] i) {
+    //加减乘除括号
+    private int calculateIII(String s, int[] idx) {
         int sum = 0, pre = 0;
         char sign = '+';
-        for (; i[0] < s.length(); i[0]++) {
-            char c = s.charAt(i[0]);
+        for (; idx[0] < s.length(); idx[0]++) {
+            char c = s.charAt(idx[0]);
             if (c == ' ') continue;
             if (Character.isDigit(c) || c == '(')  {
-                int num = 0;
+                int num;
                 if (c == '(') {
-                    i[0]++;
-                    num = calculateIII(s, i);
+                    idx[0]++;
+                    num = calculateIII(s, idx);
                 } else {
                     num = c - '0';
-                    while (i[0] + 1 < s.length() && Character.isDigit(s.charAt(i[0] + 1)))
-                        num = num * 10 + s.charAt(++i[0]) - '0';
+                    while (idx[0] + 1 < s.length() && Character.isDigit(s.charAt(idx[0] + 1)))
+                        num = num * 10 + s.charAt(++idx[0]) - '0';
                 }
                 if (sign == '+' || sign == '-')  {
                     sum += pre;

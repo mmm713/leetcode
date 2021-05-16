@@ -3,6 +3,38 @@ package com.home.learn.smartnews;
 import java.util.*;
 
 public class TopKFrequentInArray {
+    public int[] topKFrequentPq(int[] nums, int k) {
+        Arrays.sort(nums);
+        PriorityQueue<Frequent> rL = new PriorityQueue<>(Comparator.comparingInt(l -> l.value));
+        for(int i = 0; i < nums.length;i++){
+            int count = 1;
+            while(i<nums.length-1 && nums[i]==nums[i+1]){count++;i++;}
+            if(rL.size()<k) {
+                Frequent f= new Frequent(nums[i], count);
+                rL.add(f);
+            } else {
+                if (rL.peek().value<count) {
+                    Frequent f= new Frequent(nums[i], count);
+                    rL.poll();
+                    rL.add(f);
+                }
+            }
+        }
+        int[] ll = new int[k];
+        for(int i=0;i<k;i++){
+            ll[i] =  rL.poll().key;
+        }
+        return ll;
+    }
+
+    static class Frequent{
+        int key;
+        int value;
+        public Frequent(int key, int value){
+            this.key=key;
+            this.value=value;
+        }
+    }
     //桶排序做法
     public int[] topKFrequent(int[] nums, int k) {
         // frequency map of numbers

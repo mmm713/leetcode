@@ -49,7 +49,21 @@ public class Permutation {
             temp.remove(temp.size() - 1);
         }
     }
-
+/*
+=====================
+[1]
+=====================
+[2, 1]
+[1, 2]
+=====================
+[3, 2, 1]
+[2, 3, 1]
+[2, 1, 3]
+[3, 1, 2]
+[1, 3, 2]
+[1, 2, 3]
+=====================
+ */
     public List<List<Integer>> permuteV3(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         if(nums.length == 0) return result;

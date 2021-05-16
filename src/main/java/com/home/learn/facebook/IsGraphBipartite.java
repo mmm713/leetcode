@@ -1,6 +1,5 @@
 package com.home.learn.facebook;
 
-import java.util.Arrays;
 import java.util.Stack;
 
 public class IsGraphBipartite {
