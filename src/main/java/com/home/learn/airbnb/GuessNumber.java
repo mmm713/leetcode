@@ -1,46 +1,22 @@
 package com.home.learn.airbnb;
 
 public class GuessNumber {
-    public int guessNumberTenary(int n) {
-        int low = 1;
-        int high = n;
-        while (low <= high) {
-            int mid1 = low + (high - low) / 3;
-            int mid2 = high - (high - low) / 3;
-            int res1 = guess(mid1);
-            int res2 = guess(mid2);
-            if (res1 == 0)
-                return mid1;
-            if (res2 == 0)
-                return mid2;
-            else if (res1 < 0)
-                high = mid1 - 1;
-            else if (res2 > 0)
-                low = mid2 + 1;
-            else {
-                low = mid1 + 1;
-                high = mid2 - 1;
-            }
-        }
-        return -1;
-    }
-
     public int guessNumber(int n) {
         int low = 1;
         int high = n;
         while (low <= high) {
             int mid = low + (high - low) / 2;
             int res = guess(mid);
-            if (res == 0)
+            if (res == 0) {
                 return mid;
-            else if (res < 0)
+            } else if (res < 0) {
                 high = mid - 1;
-            else
+            } else {
                 low = mid + 1;
+            }
         }
         return -1;
     }
-
     private int guess(int i) {
         return i;
     }
@@ -74,5 +50,25 @@ public class GuessNumber {
             }
         }
         return dp[1][n];
+    }
+
+    //老游戏， A B表示数字和位置正确
+    public String getHint(String secret, String guess) {
+        int bulls = 0;
+        int cows = 0;
+        int[] counts = new int[10];
+        for(int i = 0; i < secret.length(); i++) {
+            if(secret.charAt(i) == guess.charAt(i)) {
+                bulls++;
+            } else {
+                if(counts[secret.charAt(i) - '0']++ < 0) {
+                    cows++;
+                }
+                if(counts[guess.charAt(i) - '0']-- > 0) {
+                    cows++;
+                }
+            }
+        }
+        return String.valueOf(bulls) + 'A' + cows + 'B';
     }
 }

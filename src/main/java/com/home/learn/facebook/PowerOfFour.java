@@ -5,6 +5,10 @@ public class PowerOfFour {
         return (num > 0 && Integer.bitCount(num) == 1 && ((num & 0xAAAAAAAA) == 0));
     }
 
+    public boolean isPowerOfFourMinus(int num) {
+        return (num > 0) && ((num & (num - 1)) == 0) && ((num & 0xAAAAAAAA) == 0);
+    }
+
     public boolean isPowerOfFourMath(int num) {
         return (num > 0) && (Math.log(num) / Math.log(2) % 2 == 0);
     }

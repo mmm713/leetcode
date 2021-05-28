@@ -6,18 +6,16 @@ public class InsertSortedCircularLinkedList {
     static class Node {
         public int val;
         public Node next;
-
         public Node() {}
-
         public Node(int _val) {
             val = _val;
         }
-
         public Node(int _val, Node _next) {
             val = _val;
             next = _next;
         }
-    };
+    }
+
     public Node insert(Node head, int insertVal) {
         if(head == null) {
             Node node = new Node(insertVal);

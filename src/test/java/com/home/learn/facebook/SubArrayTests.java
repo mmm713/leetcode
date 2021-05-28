@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class SubArrayTests {
     @Test
     void test() {
-        SubarraySumEqualsK k = new SubarraySumEqualsK();
+        SubArraySumEqualsK k = new SubArraySumEqualsK();
         int[] n0 = {1, 3, 1, 4, 23};
         assertTrue(k.subarraySumPositive(n0, 8));
         assertFalse(k.subarraySumPositive(n0, 7));

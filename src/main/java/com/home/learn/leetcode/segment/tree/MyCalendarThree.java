@@ -1,4 +1,4 @@
-package com.home.learn.wish;
+package com.home.learn.leetcode.segment.tree;
 
 public class MyCalendarThree {
     SegmentTree segmentTree;

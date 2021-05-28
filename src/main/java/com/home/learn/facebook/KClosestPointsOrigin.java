@@ -10,9 +10,9 @@ public class KClosestPointsOrigin {
         Arrays.sort(points, Comparator.comparingInt(this::getDist));
         int[][] answer = new int[k][2];
         int count = 0;
-        for(int i =0;i<points.length;i++){
+        for(int i = 0; i < points.length;i++){
             if(count<k){
-                answer[i]=points[i];
+                answer[i] = points[i];
                 count++;
             }
         }

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class SpiralMatrix {
     private enum state {up, down, left, right}
+    //返回顺时针螺旋向内结果
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> result = new ArrayList<>();
         int m = matrix.length;
@@ -56,6 +57,7 @@ public class SpiralMatrix {
         return result;
     }
 
+    //顺时针螺旋向内写
     public int[][] generateMatrix(int n) {
         int[][] result = new int[n][n];
         state state = SpiralMatrix.state.right;
@@ -105,7 +107,7 @@ public class SpiralMatrix {
         return result;
     }
 
-
+    //从任意点起顺时针螺旋访问
     public int[][] spiralMatrixIII(int rows, int cols, int rStart, int cStart) {
         int[][] result = new int[rows * cols][2];
         result[rows * cols - 1][0] = -1;

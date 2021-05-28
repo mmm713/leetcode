@@ -26,6 +26,7 @@ public class WordBreak {
         }
         return false;
     }
+    //二维DP可解。dp[i]记录0 - i的string是否拆。递推公式为dp[i] = dp[j] && 包含剩余字母
     public boolean wordBreakDP(String s, List<String> wordDict) {
         Set<String> wordDictSet=new HashSet<>(wordDict);
         boolean[] dp = new boolean[s.length() + 1];

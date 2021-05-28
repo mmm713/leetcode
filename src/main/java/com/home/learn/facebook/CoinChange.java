@@ -3,6 +3,7 @@ package com.home.learn.facebook;
 import java.util.Arrays;
 
 public class CoinChange {
+    //各种硬币求最少到amount
     public int coinChange(int[] coins, int amount) {
         int[] cache = new int[amount + 1];
         Arrays.fill(cache, amount + 1);
@@ -15,6 +16,7 @@ public class CoinChange {
         return cache[amount] <= amount ? cache[amount] : -1;
     }
 
+    //有多少种组合
     public int change(int amount, int[] coins) {
         int[] dp = new int[++amount];
         dp[0] = 1;

@@ -3,8 +3,8 @@ package com.home.learn.facebook;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SubarraySumEqualsK {
-    public int subarraySum(int[] nums, int k) {
+public class SubArraySumEqualsK {
+    public int subArraySum(int[] nums, int k) {
         int[] sum = new int[nums.length + 1];
         for(int i = 0; i < nums.length; i++) {
             sum[i + 1] = sum[i] + nums[i];

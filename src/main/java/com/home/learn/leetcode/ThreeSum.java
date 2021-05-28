@@ -32,6 +32,7 @@ public class ThreeSum {
     }
 
     //3 sum closest
+    //固定第一个数字，其余2个数字双指针遍历，复杂度n^2
     public int threeSumClosest(int[] nums, int target) {
         Arrays.sort(nums);
         int sum = nums[0] + nums[1] + nums[2];
@@ -40,17 +41,14 @@ public class ThreeSum {
             int right = nums.length -1;
             while (mid < right){
                 int threeSum = nums[left] + nums[mid] + nums[right];
-
                 if (Math.abs(sum - target) > Math.abs(threeSum - target)){
                     sum = threeSum;
                 }
                 if (threeSum == target)
                     return target;
-
                 if (threeSum > target) right --;
                 else mid ++;
             }
-
         }
         return sum;
     }

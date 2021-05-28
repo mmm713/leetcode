@@ -31,7 +31,7 @@ public class TrappingRainWater {
 
 
 
-    private int[] directions = new int[]{-1, 0, 1, 0, -1};
+    private final int[] directions = new int[]{-1, 0, 1, 0, -1};
     public int trapRainWater(int[][] heightMap) {
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[2] - b[2]);
         int m = heightMap.length;

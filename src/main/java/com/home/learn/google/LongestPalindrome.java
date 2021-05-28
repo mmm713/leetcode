@@ -1,6 +1,40 @@
 package com.home.learn.google;
 
+import java.util.Arrays;
+
 public class LongestPalindrome {
+
+    //这里建立一个二维的DP数组，其中 dp[i][j] 表示 [i,j] 区间内的字符串的最长回文子序列，
+    // 那么对于递推公式分析一下，如果 s[i]==s[j]，那么i和j就可以增加2个回文串的长度，
+    // 我们知道中间 dp[i + 1][j - 1] 的值，那么其加上2就是 dp[i][j] 的值。如果 s[i] != s[j]，
+    // 就可以去掉i或j其中的一个字符，然后比较两种情况下所剩的字符串谁dp值大，就赋给 dp[i][j]，那么递推公式如下：
+    //
+    //              /  dp[i + 1][j - 1] + 2                       if (s[i] == s[j])
+    //
+    //dp[i][j] =
+    //
+    //              \  max(dp[i + 1][j], dp[i][j - 1])        if (s[i] != s[j])
+    //二维写法参见 valid回文3
+    public int longestPalindromeSubseq(String s) {
+        char[] sc = s.toCharArray();
+        int[] dp = new int[sc.length];
+        Arrays.fill(dp, 1);
+        int res = 1;
+        for (int i = 0; i < dp.length; i++ ) {
+            int maxSoFar = 0;
+            for (int j = i - 1; j >= 0; j--) {
+                int temp = dp[j];
+                if (sc[i] == sc[j]) {
+                    dp[j] = maxSoFar + 2;
+                    res = Math.max(res, dp[j]);
+                }
+                maxSoFar = Math.max(temp, maxSoFar);
+            }
+        }
+        return res;
+    }
+
+    //类似马拉车做法
     public String longestPalindrome(String s) {
         if (s == null || s.length() <= 1) return s;
         char[] c = s.toCharArray();

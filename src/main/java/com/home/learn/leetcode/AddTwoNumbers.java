@@ -32,6 +32,44 @@ public class AddTwoNumbers {
         return l1;
     }
 
+    int calSum(int[] a, int[] b, int n, int m) {
+        if (n >= m)
+            return calSumUtil(a, b, n, m);
+        else
+            return calSumUtil(b, a, m, n);
+    }
+    // array形式，a比b长
+    int calSumUtil(int[] a, int[] b, int n, int m) {
+        // array to store sum.
+        int[] sum= new int[n];
+        int i = n - 1, j = m - 1, k = n - 1;
+        int carry = 0, s;
+        while (j >= 0) {
+            s = a[i] + b[j] + carry;
+            sum[k] = (s % 10);
+            carry = s / 10;
+            k--;
+            i--;
+            j--;
+        }
+        while (i >= 0) {
+            s = a[i] + carry;
+            sum[k] = (s % 10);
+            carry = s / 10;
+            i--;
+            k--;
+        }
+        int ans = 0;
+        if (carry == 1)
+            ans = 10;
+        // Converting array into number.
+        for ( i = 0; i <= n - 1; i++) {
+            ans += sum[i];
+            ans *= 10;
+        }
+        return ans / 10;
+    }
+
     public String addBinary(String a, String b) {
         StringBuilder sb = new StringBuilder();
         int i = a.length() - 1, j = b.length() -1, carry = 0;

@@ -4,6 +4,7 @@ public class KthLargestElementInArray {
     public int findKthLargest(int[] nums, int k) {
         return quickSelect(nums, k, 0, nums.length - 1);
     }
+    //快排最好n，最差n方
     private int quickSelect(int[] nums, int k, int left, int right)
     {
         int i = left, j = right, temp, pivot = nums[left + (right - left) / 2];

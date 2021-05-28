@@ -3,7 +3,6 @@ package com.home.learn.facebook;
 import java.util.Stack;
 
 public class IsGraphBipartite {
-
     public boolean isBipartite(int[][] graph) {
         int n = graph.length;
         int[] colors = new int[n];
@@ -29,7 +28,6 @@ public class IsGraphBipartite {
         return false;
     }
 
-
     public boolean isBipartiteBfs(int[][] graph) {
         int n = graph.length;
         int[] color = new int[n];
@@ -53,7 +51,6 @@ public class IsGraphBipartite {
         }
         return true;
     }
-
 
     public boolean isBipartiteUF(int[][] graph) {
         int n = graph.length;

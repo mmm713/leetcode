@@ -3,7 +3,7 @@ package com.home.learn.airbnb;
 
 import java.util.*;
 
-public class PalindromPair {
+public class PalindromePair {
 
     // Is the given string a palindrome after index i?
     // Tip: Leave this as a method stub in an interview unless you have time

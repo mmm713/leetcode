@@ -126,6 +126,26 @@ public class ParenthesesQuestions {
         return res + count;
     }
 
+    //一个左括号顶2个
+    public int minInsertions(String s) {
+        int left = 0, right = 0;
+        for(char ch : s.toCharArray()){
+            if(ch == '(') {
+                if(right %2 !=0){
+                    left++;
+                    right++;
+                } else {
+                    right += 2;
+                }
+            } else {
+                if(--right < 0){
+                    left++;
+                    right += 2;
+                }
+            }
+        }
+        return left + right;
+    }
 
     public String minRemoveToMakeValid(String s) {
         if (s == null || s.length() == 0)

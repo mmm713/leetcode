@@ -1,7 +1,26 @@
 package com.home.learn.facebook;
 
-public class ValidPalindrome {
+import com.home.learn.library.ListNode;
 
+public class ValidPalindrome {
+    //可删除K个是否能变成回文
+    public boolean isValidPalindrome(String s, int k) {
+        int n = s.length();
+        char[] sc = s.toCharArray();
+        int[][] dp = new int[n][n];
+        for(int j = 1; j < n; j++){
+            for(int i = j - 1; i >= 0; i--){
+                if(sc[i] == sc[j]){
+                    dp[i][j] = dp[i + 1][j - 1];
+                }else{
+                    dp[i][j] = 1 + Math.min(dp[i + 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+
+        return dp[0][n-1] <= k;
+    }
+    //看是否可以只删一个字母变成回文，遇到违规直接DFS双向贪婪删除
     public boolean validPalindrome(String s) {
         if(s.length() <= 2){
             return true;
@@ -23,6 +42,7 @@ public class ValidPalindrome {
         }
     }
 
+    //简单判定是否是回文
     public boolean isPalindrome(String s) {
         if ("".equals(s)){
             return true;
@@ -41,6 +61,38 @@ public class ValidPalindrome {
                     cj += 32;
                 if (ci != cj)
                     return false;
+            }
+        }
+        return true;
+    }
+
+    //判定链表是否回文
+
+    public boolean isPalindrome(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast.next!=null && fast.next.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        ListNode phead = head;
+        slow = slow.next;
+        ListNode prev = null;
+        ListNode next;
+        while(slow != null){
+            next = slow.next;
+            slow.next = prev;
+            prev = slow;
+            slow = next;
+        }
+
+        while(phead != null && prev != null){
+            if(phead.val == prev.val){
+                phead = phead.next;
+                prev = prev.next;
+            } else {
+                return false;
             }
         }
         return true;

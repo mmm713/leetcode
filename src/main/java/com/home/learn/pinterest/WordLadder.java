@@ -3,7 +3,7 @@ package com.home.learn.pinterest;
 import java.util.*;
 
 public class WordLadder {
-    //时空都是O MN
+    //时空都是O M^2 * N
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         HashSet<String> words = new HashSet<>(wordList);
         if (!words.contains(endWord)) {
