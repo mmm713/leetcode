@@ -1,6 +1,9 @@
 package com.home.learn.google;
 
 public class MinimumKnightMoves {
+    //因为对称关系，所有的xy都可以在0到45度角内的第一象限找到映射。且3X3范围内的步数是确定的（自己试下就有了）。
+    // 那么3X3以外的点你可以往回找。坐标3,2可以查看坐标1,1 坐标2,0，坐标2,4，坐标1,3的结果，
+    // 取最小加一就是坐标3,2的步数，以此类推直到终点。另外不要忘记只需要看0-45度角内的，其实大于Y+2的也不用看。以此可以省略查询。
     private static final int[][] dirs = new int[][] {{-1,-2},{-2,-1},{-2,1},{-1,2}};
     public int minKnightMoves(int x, int y) {
         x = Math.abs(x);
@@ -10,8 +13,10 @@ public class MinimumKnightMoves {
             x = y;
             y = t;
         }
+        //考虑到X方向和Y方向最多可以走过头1-3个单位
+        int xLimit = Math.max(x + 1, 3);
         int yLimit = Math.max(y + 3, 5);
-        int[][] steps = new int[Math.max(x + 1, 3)][yLimit];
+        int[][] steps = new int[xLimit][yLimit];
         steps[0][0] = 0;
         steps[0][1] = 3;
         steps[0][2] = 2;

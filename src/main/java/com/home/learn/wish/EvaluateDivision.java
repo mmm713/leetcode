@@ -50,7 +50,7 @@ public class EvaluateDivision {
     public double[] calcEquation(List<List<String>> es, double[] vs, List<List<String>> qs) {
         UnionFind uf = new UnionFind();
         for (int i = 0; i < es.size(); i++) {
-            uf.union(es.get(i).get(0), es.get(i).get(1), vs[i] );
+            uf.union(es.get(i).get(0), es.get(i).get(1), vs[i]);
         }
 
         double[] res = new double[qs.size()];

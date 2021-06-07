@@ -1,6 +1,7 @@
 package com.home.learn.bytedance;
 
 public class ClumsyFactorial {
+    //数字按照乘除加减顺序，直接4个一组递归求解即可
     public int clumsy(int n) {
         if (n <= 3) return helper(n);
         int res = n * (n - 1) / (n - 2) + (n - 3);

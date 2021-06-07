@@ -7,13 +7,13 @@ import java.util.*;
 public class BSTIterator {
     //O(1) for the constructor.
     //
-    //\mathcal{O}(1)O(1) for hasPrev.
+    //O(1) for hasPrev.
     //
-    //\mathcal{O}(1)O(1) for prev.
+    //O(1) for prev.
     //
-    //\mathcal{O}(1)O(1) for hasNext.
+    //O(1) for hasNext.
     //
-    //\mathcal{O}(N)O(N) for next. In the worst-case of the skewed tree one has to parse the entire tree, all NN nodes.
+    //O(N) for next. In the worst-case of the skewed tree one has to parse the entire tree, all NN nodes.
     Stack<TreeNode> stack;
     List<Integer> arr;
     TreeNode last;

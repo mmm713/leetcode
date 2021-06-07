@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class StringTransformsIntoAnotherString {
+    //只要不把26个字符用光，就有操作的空间
     public boolean canConvert(String str1, String str2) {
         Set<Character> set = new HashSet<>();
         Map<Character, Character> map = new HashMap<>();

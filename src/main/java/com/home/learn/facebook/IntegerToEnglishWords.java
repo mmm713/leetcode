@@ -13,9 +13,9 @@ public class IntegerToEnglishWords {
     public String numberToWords(int num) {
         if (num == 0) return UNIT1[0];
         StringBuilder sb = new StringBuilder();
-        int u = num % 1000; num/=1000;
-        int x = num % 1000; num/=1000;
-        int y = num % 1000; num/=1000;
+        int u = num % 1000; num /= 1000;
+        int x = num % 1000; num /= 1000;
+        int y = num % 1000; num /= 1000;
         int z = num;
         if (z > 0)
             baseConvert(sb, z).append(" Billion");
