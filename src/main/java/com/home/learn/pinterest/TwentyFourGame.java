@@ -16,7 +16,7 @@ public class TwentyFourGame {
         for (int i = 0; i < nums.size(); i++) {
             for (int j = 0; j < nums.size(); j++) {
                 if (i != j) {
-                    ArrayList<Double> nums2 = new ArrayList<Double>();
+                    ArrayList<Double> nums2 = new ArrayList<>();
                     for (int k = 0; k < nums.size(); k++)
                         if (k != i && k != j)
                             nums2.add(nums.get(k));

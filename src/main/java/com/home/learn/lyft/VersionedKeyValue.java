@@ -6,7 +6,6 @@ import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class VersionedKeyValue<K, V> {
-
     Map<K, TreeMap<Integer, V>> map;
     AtomicInteger version;
     public VersionedKeyValue() {

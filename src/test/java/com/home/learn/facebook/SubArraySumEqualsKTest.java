@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SubArrayTests {
+public class SubArraySumEqualsKTest {
+
     @Test
     void test() {
         SubArraySumEqualsK k = new SubArraySumEqualsK();

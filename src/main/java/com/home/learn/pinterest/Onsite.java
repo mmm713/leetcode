@@ -37,10 +37,8 @@ public class Onsite {
             if(input.get(i)[0] > window[1]) {
                 result.add(window.clone());
                 window[0] = input.get(i)[0];
-                window[1] = input.get(i)[1];
-            } else {
-                window[1] = input.get(i)[1];
             }
+            window[1] = input.get(i)[1];
         }
         result.add(window.clone());
         return result;

@@ -3,6 +3,9 @@ package com.home.learn.microsoft;
 import com.home.learn.library.ListNode;
 
 public class RotateLinkedList {
+    public static void main(String[] args) {
+
+    }
     public ListNode rotateRight(ListNode head, int k) {
         if(head == null) return null;
         else if(head.next == null) return head;
