@@ -12,9 +12,8 @@ public class MaximumDistanceElectricalCar {
     //{1,1,1,9,9,9}, k = 3，跑法为 休，跑，休，跑跑跑
     public int maxDistance(int[] dis, int k) {
         int[][] dp = new int[dis.length][k + 1];
-        dp[0][k - 1] = dis[0];
-        int res = dis[0];
-        for (int i = 1; i < dis.length; i++) {
+        int res = 0;
+        for (int i = 0; i < dis.length; i++) {
             for (int j = Math.max(0, k - i - 1); j <= k; j++) {
                 if(j == 0) {
                     dp[i][j] = dp[i - 1][j + 1] + dis[i];
@@ -27,5 +26,20 @@ public class MaximumDistanceElectricalCar {
             }
         }
         return res;
+    }
+
+    public int maxDistanceDfs(int[] dis, int k) {
+        return dfs(dis, k, 0, k);
+    }
+
+    private int dfs(int[] dis, int k, int i, int kmax) {
+        if(i >= dis.length) {
+            return 0;
+        }
+        if(k == 0) {
+            return dfs(dis, Math.min(kmax, k + 1), i + 1, kmax);
+        } else {
+            return Math.max(dfs(dis, Math.min(kmax, k + 1), i + 1, kmax), dis[i] + dfs(dis, k - 1, i + 1, kmax));
+        }
     }
 }

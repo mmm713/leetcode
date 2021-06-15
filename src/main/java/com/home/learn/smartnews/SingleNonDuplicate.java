@@ -1,6 +1,7 @@
 package com.home.learn.smartnews;
 
 public class SingleNonDuplicate {
+    //540 Single Element in a Sorted Array
     public int singleNonDuplicate(int[] nums) {
         int lo = 0;
         int hi = nums.length - 1;
