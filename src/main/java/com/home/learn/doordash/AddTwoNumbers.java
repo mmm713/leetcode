@@ -1,12 +1,10 @@
-package com.home.learn.leetcode;
+package com.home.learn.doordash;
 
 import com.home.learn.library.ListNode;
 
 public class AddTwoNumbers {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        if(l1 == null) return l2;
-        if(l2 == null) return l1;
-        ListNode r1 = l1, r2 = l2, previous = null;
+        ListNode r1 = l1, r2 = l2, prev = null;
         int carry = 0;
         while(r1 != null) {
             int temp = r1.val;
@@ -23,11 +21,11 @@ public class AddTwoNumbers {
                 r1.val = (r1.val + carry) % 10;
                 carry = (carry + temp) / 10;
             }
-            previous = r1;
+            prev = r1;
             r1 = r1.next;
         }
         if(carry > 0)  {
-            previous.next = new ListNode(carry);
+            prev.next = new ListNode(carry);
         }
         return l1;
     }

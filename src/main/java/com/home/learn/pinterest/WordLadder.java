@@ -16,7 +16,7 @@ public class WordLadder {
         end.add(endWord);
 
         int len = 1;
-        while (!begin.isEmpty() && !end.isEmpty()) {
+        while (!begin.isEmpty()) {
             // Calculate smaller set
             // 这步是优化
             if (begin.size() > end.size()) {
@@ -92,17 +92,17 @@ public class WordLadder {
         HashSet<String> words = new HashSet<>(wordList);
         HashSet<String> used = new HashSet<>(Collections.singletonList(beginWord));
         //queue contains all temp results
-        Queue<LinkedList<String>> queue = new LinkedList<>();
+        Queue<List<String>> queue = new ArrayDeque<>();
         List<List<String>> result = new ArrayList<>();
         boolean found = false;
-        queue.offer(new LinkedList<>(Collections.singletonList(beginWord)));
+        queue.offer(new ArrayList<>(Collections.singletonList(beginWord)));
 
         while(!queue.isEmpty() && !found) {
             int size = queue.size();
             HashSet<String> localUsed = new HashSet<>();
             while(size > 0) {
-                LinkedList<String> curr = queue.poll();
-                char[] word = curr.getLast().toCharArray();
+                List<String> curr = queue.poll();
+                char[] word = curr.get(curr.size() - 1).toCharArray();
                 for(int i = 0; i < word.length; i++){
                     char wc = word[i];
                     for(int j = 'a'; j <= 'z';j++){
