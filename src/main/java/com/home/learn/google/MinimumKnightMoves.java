@@ -45,7 +45,6 @@ public class MinimumKnightMoves {
                 }
             }
         }
-
         return steps[x][y];
     }
 }

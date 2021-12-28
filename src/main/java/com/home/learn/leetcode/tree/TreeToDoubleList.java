@@ -61,6 +61,7 @@ public class TreeToDoubleList {
         return headTail[0];
     }
 
+    //head[0] 为全局的头， head[1]为上一次访问
     private void inOrder(TreeNode root, TreeNode[] headTail) {
         if(root == null) return;
         inOrder(root.left, headTail);

@@ -39,30 +39,39 @@ public class BasicCalculator {
         return result;
     }
 
-    //只有加减乘除
+    //只有加减乘除，只有遇到加减号才可以合并之前结果
     public int calculateII(String s) {
-        Stack<String> stack = new Stack<>();
-        String d = "";
-        char sign = '+';
-        for(int i = 0 ; i < s.length() ; i++){
-            char c = s.charAt(i);
-            if(c >= '0') {
-                d += c;
-            }
-            if((c < '0' && c != ' ') || i == s.length() - 1) {
-                if(sign == '+') stack.add(d);
-                else if(sign == '-') stack.add(sign + d);
-                else if(sign == '*' || sign == '/') {
-                    String temp = String.valueOf((sign == '*') ?
-                            Integer.parseInt(stack.pop()) * Integer.parseInt(d) :
-                            Integer.parseInt(stack.pop()) / Integer.parseInt(d));
-                    stack.add(temp);
+        int res = 0;
+        int currNum = 0;
+        int lastNum = 0;
+        char opt = '+';
+        for (char c : s.toCharArray()) {
+            if (c == ' ') continue;
+            if (Character.isDigit(c)) {
+                currNum = currNum * 10 + c - '0';
+            } else {
+                lastNum = cal(lastNum, currNum, opt);
+                if (c == '+' || c == '-') {
+                    res += lastNum;
+                    lastNum = 0;
                 }
-                sign = c;
-                d = "";
+                currNum = 0;
+                opt = c;
             }
         }
-        return stack.stream().map(Integer::parseInt).reduce(0, Integer::sum);
+        return res + cal(lastNum, currNum, opt);
+    }
+
+    private int cal(int lastNum, int currNum, char opt) {
+        if (opt == '+') {
+            return lastNum + currNum;
+        } else if (opt == '-') {
+            return lastNum - currNum;
+        } else if (opt == '*') {
+            return lastNum * currNum;
+        } else {
+            return lastNum / currNum;
+        }
     }
 
     //加减乘除括号
