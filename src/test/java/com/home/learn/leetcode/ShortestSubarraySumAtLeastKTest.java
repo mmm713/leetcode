@@ -11,6 +11,6 @@ public class ShortestSubarraySumAtLeastKTest {
         ShortestSubarraySumAtLeastK leastK = new ShortestSubarraySumAtLeastK();
         int[] input = {7, -9, -10};
         int ans = leastK.shortestSubarray(input, 4);
-        assertEquals(4, ans);
+        assertEquals(1, ans);
     }
 }
