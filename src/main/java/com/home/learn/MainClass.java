@@ -24,6 +24,7 @@ public class MainClass {
         int[] toDel = {1, 5};
         DeleteNodesAndReturnForest test = new DeleteNodesAndReturnForest();
         List<TreeNode> res = test.delNodes(root, toDel);
-        res.forEach(Helpers.TreePrinter::printNode);
+//        res.forEach(Helpers.TreePrinter::printNode);
+        res.forEach(System.out::println);
     }
 }
