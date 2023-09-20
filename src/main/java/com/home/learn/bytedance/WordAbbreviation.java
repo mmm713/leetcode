@@ -71,4 +71,26 @@ public class WordAbbreviation {
                 (s.length() - 1 - k) +
                 s.charAt(s.length() - 1);
     }
+
+    public boolean validWordAbbreviation(String word, String abbr) {
+        char[] wc = word.toCharArray();
+        char[] ac = abbr.toCharArray();
+        int i = 0, j = 0;
+        while (i < wc.length && j < ac.length) {
+            if(wc[i] == ac[j]) {
+                i++; j++;
+            } else if (ac[j] <= '9' && ac[j] > '0') {
+                int num = ac[j++] - '0';
+                while (j < ac.length && ac[j] <= '9' && ac[j] >= '0') {
+                    num *= 10;
+                    num += ac[j++] - '0';
+                }
+                i += num;
+            } else {
+                return false;
+            }
+        }
+        return i == wc.length && j == ac.length;
+    }
+
 }

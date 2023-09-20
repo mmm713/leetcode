@@ -7,7 +7,7 @@ public class LetterCombinationsPhoneNumber {
     private static final String[] KEYS = { "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
     public List<String> letterCombinations(String digits) {
         List<String> result = new ArrayList<>();
-        if(digits == null || digits.length() == 0) return result;
+        if(digits == null || digits.isEmpty()) return result;
         combination("", digits, 0, result);
         return result;
     }

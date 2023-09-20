@@ -37,9 +37,9 @@ public class BSTIterator {
                 stack.push(last);
                 last = last.left;
             }
-            TreeNode current = stack.pop();
-            last = current.right;
-            arr.add(current.val);
+            last = stack.pop();
+            arr.add(last.val);
+            last = last.right;
         }
         return arr.get(counter);
     }

@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class BinaryTreeInOrderIterator {
 
-    private Stack<TreeNode> stack;
+    private final Stack<TreeNode> stack;
     public BinaryTreeInOrderIterator(TreeNode root) {
         stack = new Stack<>();
         while (root != null) {

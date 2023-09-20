@@ -148,7 +148,7 @@ public class ParenthesesQuestions {
     }
 
     public String minRemoveToMakeValid(String s) {
-        if (s == null || s.length() == 0)
+        if (s == null || s.isEmpty())
             return s;
         int left = 0;
         char[] sc = s.toCharArray();

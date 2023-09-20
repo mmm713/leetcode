@@ -15,7 +15,7 @@ public class BinaryTreePaths {
     }
 
     private void dfs(TreeNode root, String tmp, List<String> result) {
-        tmp += (tmp.equals("") ? "" : "->") + root.val;
+        tmp += (tmp.isEmpty() ? "" : "->") + root.val;
         if(root.left != null) {
             dfs(root.left, tmp, result);
         }

@@ -115,4 +115,18 @@ public class Helpers {
             return true;
         }
     }
+
+    public static long combination(long n, long r) {
+        return factorial(n) / factorial(r) / factorial(n-r);
+    }
+
+    private static long factorial(long n) {
+        long fact = 1;
+        long i = 1;
+        while(i <= n) {
+            fact *= i;
+            i++;
+        }
+        return fact;
+    }
 }
