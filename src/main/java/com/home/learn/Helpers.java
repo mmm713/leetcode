@@ -8,6 +8,22 @@ import java.util.Collections;
 import java.util.List;
 
 public class Helpers {
+    public static int gcd(int a, int b) {
+        if (a == 0) { return b; }
+        return gcd(b % a, a);
+    }
+    public static int getGCD(int a, int b) {
+        while (a > 0 && b > 0) {
+            if (a > b) {
+                a = a % b;
+            } else {
+                b = b % a;
+            }
+        }
+        if (a == 0) { return b; }
+        return a;
+    }
+
     public static void print2D(int[][] mat) {
         for (int[] row : mat)
             System.out.println(Arrays.toString(row));
