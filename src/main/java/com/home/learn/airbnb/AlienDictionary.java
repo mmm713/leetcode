@@ -9,8 +9,6 @@ public class AlienDictionary {
     private boolean[][] edges = new boolean[26][26];
     private int[] inDegree = new int[26];
 
-    private StringBuilder res = new StringBuilder();
-
     public String alienOrder(String[] words) {
         buildGraph(words);
         return topologyPrint(edges, inDegree);

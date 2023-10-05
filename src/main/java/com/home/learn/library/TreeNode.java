@@ -8,6 +8,6 @@ public class TreeNode {
 
      @Override
      public String toString() {
-          return String.valueOf(val) + "_" + left + "_" + right;
+          return val + "_" + left + "_" + right;
      }
 }

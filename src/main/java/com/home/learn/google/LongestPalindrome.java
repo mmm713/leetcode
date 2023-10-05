@@ -38,6 +38,7 @@ public class LongestPalindrome {
     public String longestPalindrome(String s) {
         if (s == null || s.length() <= 1) return s;
         char[] c = s.toCharArray();
+        //max为最终{长度，左}
         int[] max = new int[]{0, 0};
         int i = 0;
         while (i < c.length) {
@@ -85,7 +86,7 @@ public class LongestPalindrome {
     }
 
     public String longestPalindromeV2(String s) {
-        if (s.length() == 0) return "";
+        if (s.isEmpty()) return "";
         int min = 0, max = 1 ;
         int idx = 1 , length = s.length();
         while (idx < length) {
