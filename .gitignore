@@ -9,3 +9,6 @@ out
 gen
 build
 .gradle
+.claude
+.codex
+.kotlin
